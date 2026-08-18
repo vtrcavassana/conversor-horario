@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Conversor de Horário</title>
+  <meta name="description" content="Converte um horário entre Brasil, Portugal, Malásia, Coreia do Sul e EUA (Leste). Funciona offline.">
+  <meta name="theme-color" content="#0f1115">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- Caminhos relativos: o app roda em subpasta no GitHub Pages, não na raiz do domínio. -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app">
+
+    <header class="cabecalho">
+      <h1>Conversor de Horário</h1>
+    </header>
+
+    <!-- Painel do país mestre: o único com data e hora editáveis. -->
+    <section class="painel-mestre" aria-labelledby="rotulo-referencia">
+      <div class="linha-referencia">
+        <label id="rotulo-referencia" for="seletor-pais">Referência</label>
+        <select id="seletor-pais" aria-describedby="indicador-modo"></select>
+      </div>
+
+      <div class="linha-campos">
+        <div class="campo">
+          <label for="campo-data">Data</label>
+          <input type="date" id="campo-data" autocomplete="off">
+        </div>
+        <div class="campo">
+          <label for="campo-hora">Hora</label>
+          <input type="time" id="campo-hora" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="linha-acoes">
+        <button type="button" id="botao-agora">Agora</button>
+        <p id="indicador-modo" class="indicador-modo" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <p id="mensagem-erro" class="mensagem-erro" role="alert" hidden></p>
+
+    <!-- Cards dos países não-mestre, montados pelo app.js. -->
+    <section id="grade-cards" class="grade-cards" aria-label="Horários correspondentes"></section>
+
+    <footer class="rodape">
+      <p>Cálculo local, sem internet. Fusos e horário de verão vêm do próprio sistema.</p>
+    </footer>
+
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

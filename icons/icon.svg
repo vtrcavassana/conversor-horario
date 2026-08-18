@@ -1,0 +1,9 @@
+<!-- Ícone principal. Se mudar o desenho, atualizar também icon-maskable.svg
+     e a cópia usada em ferramentas/gerar-icones.html. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="112" fill="#0f1115"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#262b36" stroke-width="26"/>
+  <path d="M256 106 A150 150 0 0 1 406 256" fill="none" stroke="#4fd1c5" stroke-width="26" stroke-linecap="round"/>
+  <path d="M256 160 V256 L322 296" fill="none" stroke="#e8eaf0" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="256" cy="256" r="13" fill="#4fd1c5"/>
+</svg>

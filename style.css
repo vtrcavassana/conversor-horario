@@ -1,0 +1,262 @@
+/* Conversor de Horário — layout de tela única, pensado primeiro pro celular. */
+
+:root {
+  --fundo: #0f1115;
+  --fundo-painel: #171a21;
+  --fundo-card: #171a21;
+  --borda: #262b36;
+  --texto: #e8eaf0;
+  --texto-suave: #9aa2b4;
+  --destaque: #4fd1c5;
+  --adiante: #f6c453;
+  --atras: #7aa2f7;
+  --erro: #ff6b6b;
+  --raio: 14px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --fundo: #f4f5f8;
+    --fundo-painel: #ffffff;
+    --fundo-card: #ffffff;
+    --borda: #dcdfe6;
+    --texto: #1a1d24;
+    --texto-suave: #626a7a;
+    --destaque: #0f9b8e;
+    --adiante: #a86a00;
+    --atras: #2b5fd9;
+    --erro: #c92a2a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* Respeita a barra de status quando instalado como app. */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 16px 32px;
+}
+
+.cabecalho h1 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* --- Painel do país de referência --- */
+
+.painel-mestre {
+  background: var(--fundo-painel);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 16px;
+}
+
+.linha-referencia {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.linha-referencia label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+
+.linha-campos {
+  display: flex;
+  gap: 12px;
+}
+
+.campo {
+  flex: 1;
+  min-width: 0;
+}
+
+.campo label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+  margin-bottom: 4px;
+}
+
+select,
+input[type='date'],
+input[type='time'] {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--texto);
+  background: var(--fundo);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  /* Alvos de toque confortáveis no celular. */
+  min-height: 48px;
+}
+
+select:focus,
+input:focus,
+button:focus-visible {
+  outline: 2px solid var(--destaque);
+  outline-offset: 1px;
+}
+
+.linha-acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+button {
+  padding: 12px 22px;
+  min-height: 48px;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--fundo);
+  background: var(--destaque);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:active {
+  filter: brightness(0.9);
+}
+
+.indicador-modo {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Deixa claro qual dos dois modos está ativo. */
+.indicador-modo.ao-vivo {
+  color: var(--destaque);
+  font-weight: 600;
+}
+
+.mensagem-erro {
+  margin: 12px 0 0;
+  padding: 12px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--erro) 15%, transparent);
+  color: var(--erro);
+  font-size: 0.9rem;
+}
+
+/* --- Cards dos demais países --- */
+
+.grade-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.card {
+  background: var(--fundo-card);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 14px;
+}
+
+.card-titulo {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.card-cidade {
+  margin: 2px 0 0;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
+
+.card-hora {
+  margin: 10px 0 12px;
+  /* Tabular evita que os números "dancem" a cada segundo. */
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.hora-principal {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.hora-segundos {
+  font-size: 1rem;
+  color: var(--texto-suave);
+}
+
+.hora-sufixo {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+  margin-left: 4px;
+}
+
+.card-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.etiqueta-dia {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--borda);
+  color: var(--texto-suave);
+}
+
+.etiqueta-dia[data-diferenca='adiante'] {
+  color: var(--adiante);
+  border-color: color-mix(in srgb, var(--adiante) 45%, transparent);
+}
+
+.etiqueta-dia[data-diferenca='atras'] {
+  color: var(--atras);
+  border-color: color-mix(in srgb, var(--atras) 45%, transparent);
+}
+
+.card-offset {
+  font-size: 0.7rem;
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.rodape {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.rodape p {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--texto-suave);
+}
